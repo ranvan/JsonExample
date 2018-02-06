@@ -1,6 +1,8 @@
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +10,14 @@ import java.util.List;
 public class TestGson {
     private static final Gson GSON = new Gson();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Person person = new Person("Vasya", 30, Arrays.asList("Moscow", "Berlin", "Dubai"));
         String json = GSON.toJson(person);
         System.out.println(json);
+
+        FileWriter fileWriter = new FileWriter("D:\\test.txt");
+        fileWriter.write(json);
+        fileWriter.close();
 
         Person person1 = GSON.fromJson(json, Person.class);
         System.out.println(person1.getName());
